@@ -3,3 +3,5 @@ dist
 server/data
 server/.env
 .vite
+.wrangler
+.dev.vars

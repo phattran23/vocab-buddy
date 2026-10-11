@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "vocab-buddy",
+  "main": "worker/index.js",
+  "compatibility_date": "2025-09-01",
+  // Built client (npm run build). Only /api/* runs the Worker; everything else is a static file
+  // or falls back to index.html for the single-page app.
+  "assets": {
+    "directory": "./client/dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  // D1 is created automatically on first deploy. Tables and words are seeded by the Worker.
+  "d1_databases": [{ "binding": "DB", "database_name": "vocab-buddy" }]
+}

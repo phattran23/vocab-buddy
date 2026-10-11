@@ -18,6 +18,27 @@ npm run dev
 
 Open http://localhost:5173 (also on your phone via the Network URL Vite prints, same Wi-Fi).
 
+## Deploy to Cloudflare (Workers + D1)
+
+One Worker serves the built client and the API (`worker/index.js`), with data in a D1 database.
+Tables and words are created/updated automatically by the Worker on the first request after a deploy.
+
+Cloudflare dashboard → Workers & Pages → Create → Import a repository, then:
+
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Root directory | `/` |
+
+The D1 database (`vocab-buddy`) is provisioned on the first deploy. Optional: set a `JWT_SECRET`
+secret in the Worker settings; without it a random one is generated and stored in D1.
+Google Sign-In and downloaded photos are only available in the local Express server.
+
+Local test of the Worker: `npm run cf:dev` (http://localhost:8787). Manual deploy: `npm run cf:deploy`.
+
+After editing the word lists, `npm run build` regenerates `worker/content.generated.js` (commit it).
+
 ## Keys (server/.env)
 
 | Variable | Where to get it |
