@@ -31,7 +31,7 @@ Cloudflare dashboard → Workers & Pages → Create → Import a repository, the
 | Deploy command | `npx wrangler deploy` |
 | Root directory | `/` |
 
-The D1 database (`vocab-buddy`) is provisioned on the first deploy. Optional: set a `JWT_SECRET`
+The D1 database `vocab-buddy` is referenced by id in `wrangler.jsonc` (create your own with `npx wrangler d1 create vocab-buddy` if you fork this). Optional: set a `JWT_SECRET`
 secret in the Worker settings; without it a random one is generated and stored in D1.
 Google Sign-In and downloaded photos are only available in the local Express server.
 
